@@ -14,15 +14,56 @@ html{scroll-behavior:smooth;}
 body{background:var(--noir);color:var(--text);font-family:'Jost',sans-serif;overflow-x:hidden;}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:999;padding:.55rem 3rem;min-height:72px;display:flex;justify-content:space-between;align-items:center;transition:.4s;background:transparent;}
-nav.scrolled{background:rgba(8,8,8,.97);border-bottom:1px solid rgba(201,169,110,.2);}
-.logo{display:flex;align-items:center;text-decoration:none;line-height:0;}
-.logo img{height:68px;width:auto;display:block;object-fit:contain;}
-.nav-links{display:flex;gap:2rem;list-style:none;}
-.nav-links a{color:var(--muted);text-decoration:none;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;transition:.3s;}
-.nav-links a:hover{color:var(--gold);}
-.hamburger{display:none;flex-direction:column;justify-content:center;align-items:center;gap:6px;width:44px;height:44px;cursor:pointer;padding:0;margin:0;flex-shrink:0;align-self:center;}
-.hamburger span{width:24px;height:2px;background:var(--gold);display:block;}
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:999;
+  padding:.4rem 2.5rem;min-height:70px;
+  display:flex;justify-content:space-between;align-items:center;gap:1.5rem;
+  background:linear-gradient(180deg,rgba(8,8,8,.85),rgba(8,8,8,.35));
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid transparent;transition:.35s ease;
+}
+nav.scrolled{
+  background:rgba(8,8,8,.94);
+  border-bottom-color:rgba(201,169,110,.28);
+  box-shadow:0 10px 40px rgba(0,0,0,.35);
+}
+.logo{display:flex;align-items:center;text-decoration:none;line-height:0;flex-shrink:0;}
+.logo img{height:64px;width:auto;display:block;object-fit:contain;transition:.3s;}
+.nav-links{display:flex;align-items:center;gap:1.75rem;list-style:none;margin:0;padding:0;}
+.nav-links a{
+  position:relative;color:var(--muted);text-decoration:none;
+  font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;transition:.3s;
+  padding:.35rem 0;
+}
+.nav-links a::after{
+  content:'';position:absolute;left:0;bottom:0;width:0;height:1px;
+  background:var(--gold);transition:.3s ease;
+}
+.nav-links a:hover,.nav-links a.active{color:var(--gold);}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+.nav-cta{
+  display:inline-flex;align-items:center;justify-content:center;
+  margin-left:.5rem;padding:.55rem 1.25rem;
+  border:1px solid rgba(201,169,110,.55);color:var(--gold)!important;
+  font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
+  transition:.3s;white-space:nowrap;
+}
+.nav-cta::after{display:none!important;}
+.nav-cta:hover{background:var(--gold);color:#000!important;border-color:var(--gold);}
+.hamburger{
+  display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;
+  width:42px;height:42px;cursor:pointer;padding:0;margin:0;flex-shrink:0;
+  border:1px solid rgba(201,169,110,.35);background:transparent;transition:.3s;
+}
+.hamburger:hover{border-color:var(--gold);}
+.hamburger span{
+  width:18px;height:1.5px;background:var(--gold);display:block;
+  transition:.3s ease;transform-origin:center;
+}
+.hamburger.open{border-color:var(--gold);}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
 
 /* HERO */
 .hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;overflow:hidden;}
@@ -85,6 +126,8 @@ section{padding:7rem 2rem;}
 .skill-desc{font-size:.85rem;color:var(--muted);line-height:1.7;margin-bottom:1.5rem;}
 .progress-bar{background:rgba(255,255,255,.08);height:2px;margin-bottom:1.5rem;}
 .progress-fill{height:100%;background:var(--gold);width:0;transition:width 1.2s ease;}
+.skill-card-link{display:block;color:inherit;text-decoration:none;}
+.skill-card-cta{display:inline-flex;align-items:center;gap:.4rem;margin-top:.5rem;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);}
 
 /* PRODUCTS */
 .products-label{font-size:.6rem;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;margin-bottom:.8rem;}
@@ -159,10 +202,11 @@ section{padding:7rem 2rem;}
 .gallery-item{position:relative;overflow:hidden;cursor:pointer;aspect-ratio:3/4;}
 .gallery-item img{width:100%;height:100%;object-fit:cover;filter:brightness(.75);transition:.5s;}
 .gallery-item:hover img{filter:brightness(.4);transform:scale(1.06);}
-.gallery-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:1.2rem;opacity:0;transition:.4s;}
+.gallery-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:1.2rem;opacity:0;transition:.4s;background:linear-gradient(transparent 45%,rgba(0,0,0,.75));}
 .gallery-item:hover .gallery-overlay{opacity:1;}
 .gallery-overlay span{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--gold);}
 .gallery-overlay small{font-size:.65rem;color:var(--rose);letter-spacing:.15em;text-transform:uppercase;}
+a.gallery-item{display:block;color:inherit;text-decoration:none;}
 
 /* FOOTER */
 footer{background:var(--card);padding:3rem 2rem;text-align:center;border-top:1px solid rgba(201,169,110,.15);}
@@ -178,12 +222,25 @@ footer .logo img{height:120px;}
 .reveal.visible{opacity:1;transform:translateY(0);}
 
 /* MOBILE */
-@media(max-width:768px){
-  nav{padding:.45rem 1.5rem;min-height:64px;}
-  .logo img{height:56px;}
-  .nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(8,8,8,.95);flex-direction:column;gap:0;border-top:1px solid rgba(201,169,110,.15);padding:1rem 2rem;}
-  .nav-links.show{display:flex;}
-  .hamburger{display:flex;position:absolute;right:1.5rem;top:50%;transform:translateY(-50%);}
+@media(max-width:900px){
+  nav{padding:.35rem 1.25rem;min-height:64px;}
+  .logo img{height:54px;}
+  .nav-links{
+    display:none;position:absolute;top:100%;left:0;right:0;
+    background:rgba(8,8,8,.98);flex-direction:column;align-items:stretch;gap:0;
+    border-top:1px solid rgba(201,169,110,.2);
+    padding:1.25rem 1.5rem 1.75rem;z-index:1000;
+    box-shadow:0 20px 50px rgba(0,0,0,.45);
+  }
+  .nav-links.show{display:flex !important;}
+  .nav-links li{margin:0;border-bottom:1px solid rgba(201,169,110,.08);}
+  .nav-links li:last-child{border-bottom:none;}
+  .nav-links a{display:block;padding:1rem 0;font-size:.8rem;letter-spacing:.2em;}
+  .nav-links a::after{display:none;}
+  .nav-cta{margin:1rem 0 0;width:100%;justify-content:center;padding:.9rem 1.25rem;background:rgba(201,169,110,.08);}
+  .hamburger{display:flex;position:relative;right:auto;top:auto;transform:none;z-index:1001;}
+  .gallery-overlay{opacity:1;}
+  .gallery-item img{filter:brightness(.55);}
   .about-grid,.contact-grid,.business-grid{grid-template-columns:1fr;gap:3rem;}
   .business-highlights{grid-template-columns:1fr;}
   .business-card{padding:2rem;}
@@ -207,9 +264,9 @@ footer .logo img{height:120px;}
     <li><a href="#skills">Skills</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#gallery">Gallery</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact" class="nav-cta">Enquire</a></li>
   </ul>
-  <div class="hamburger"><span></span><span></span><span></span></div>
+  <button class="hamburger" type="button" aria-label="Open menu"><span></span><span></span><span></span></button>
 </nav>
 
 <!-- HERO -->
@@ -417,7 +474,7 @@ const SKILLS = [
     name:"Fashion Designing",
     tag:"Design & Craft",
     icon:"✂️",
-    img:"https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=600&q=80",
+    img:"https://images.unsplash.com/photo-1445205170230-053b83016050?w=600&q=80",
     desc:"Sketching, draping, pattern making, and fabric selection — the full design pipeline from concept to garment.",
     progress:98,
     products:[
@@ -437,7 +494,7 @@ const SKILLS = [
         "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=300&q=80"
       ]},
       {name:"Bespoke Bridal Design",desc:"One-of-a-kind bridal lehengas and gowns with intricate embellishments and heirloom-quality finish.",images:[
-        "https://images.unsplash.com/photo-1594552072238-b8a33785b6cd?w=300&q=80",
+        "https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=300&q=80",
         "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=300&q=80",
         "https://images.unsplash.com/photo-1607748862156-7c548e7e98f4?w=300&q=80"
       ]}
@@ -484,7 +541,7 @@ const SKILLS = [
       {name:"Production Management",desc:"Overseeing end-to-end garment production — from first sample to final delivery.",images:[
         "https://images.unsplash.com/photo-1445205170230-053b83016050?w=300&q=80",
         "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=300&q=80",
-        "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=80"
+        "https://images.unsplash.com/photo-1445205170230-053b83016050?w=300&q=80"
       ]},
       {name:"Quality Audit Services",desc:"Third-party quality audits for garment factories and ateliers to meet export standards.",images:[
         "https://images.unsplash.com/photo-1537832816519-689ad163238b?w=300&q=80",
@@ -504,7 +561,7 @@ const SKILLS = [
       {name:"Sportswear Collection Design",desc:"Designed seasonal activewear lines for Adidas India — mesh panels, performance cuts, and colourways.",images:[
         "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&q=80",
         "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=300&q=80",
-        "https://images.unsplash.com/photo-1556906781-9a412961a28c?w=300&q=80"
+        "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=300&q=80"
       ]},
       {name:"Nike Lifestyle Capsule",desc:"Limited capsule collection bridging streetwear and South Asian aesthetics for the Indian market.",images:[
         "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&q=80",
@@ -539,7 +596,7 @@ const SKILLS = [
       {name:"Vendor Management",desc:"Building and maintaining relationships with fabric vendors, trims suppliers, and contract manufacturers.",images:[
         "https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&q=80",
         "https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=300&q=80",
-        "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&q=80"
+        "https://images.unsplash.com/photo-1445205170230-053b83016050?w=300&q=80"
       ]},
       {name:"Stock Audit & Liquidation",desc:"Physical stock audits and end-of-season liquidation strategy for fashion retailers.",images:[
         "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=300&q=80",
@@ -557,7 +614,7 @@ const SKILLS = [
     progress:93,
     products:[
       {name:"Wedding Trousseau",desc:"Complete bridal trousseau design — lehengas, sarees, salwar sets — custom made for the bride's vision.",images:[
-        "https://images.unsplash.com/photo-1594552072238-b8a33785b6cd?w=300&q=80",
+        "https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=300&q=80",
         "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=300&q=80",
         "https://images.unsplash.com/photo-1607748862156-7c548e7e98f4?w=300&q=80"
       ]},
@@ -593,22 +650,23 @@ const TIMELINE = [
 const BRANDS = ["FASHORMEN","ADIDAS","NIKE","H&M","ZARA","FOREVER 21","LIFESTYLE","PANTALOONS","MAX FASHION","MANGO","TOMMY HILFIGER","WILLS INDIA","AND OTHERS"];
 
 const GALLERY = [
-  {src:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80",label:"Runway SS2025",cat:"Runway"},
-  {src:"https://images.unsplash.com/photo-1483985988355-763728e1935b?w=500&q=80",label:"Ladies Collection",cat:"Ladies"},
-  {src:"https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=500&q=80",label:"Baby Wear Line",cat:"Baby"},
-  {src:"https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=500&q=80",label:"Studio Session",cat:"Studio"},
-  {src:"https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500&q=80",label:"Editorial Shoot",cat:"Ladies"},
-  {src:"https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500&q=80",label:"Special Orders",cat:"Bespoke"},
-  {src:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80",label:"Brand Collab – Adidas",cat:"Brands"},
-  {src:"https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=500&q=80",label:"Celebrity Styling",cat:"Bespoke"},
-  {src:"https://images.unsplash.com/photo-1509631179647-0177331693ae?w=500&q=80",label:"Ramp Walk Direction",cat:"Runway"}
+  {src:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80",label:"Runway SS2025",cat:"Runway",desc:"A high-energy seasonal runway presentation featuring flowing silhouettes, gold accents, and contemporary Indian couture for Mumbai Fashion Week.",images:["https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80","https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&q=80","https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&q=80","https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800&q=80"]},
+  {src:"https://images.unsplash.com/photo-1483985988355-763728e1935b?w=500&q=80",label:"Ladies Collection",cat:"Ladies",desc:"Wearable women's fashion blending traditional craftsmanship with modern cuts — evening wear, casual lines, and ethnic fusion for everyday elegance.",images:["https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800&q=80","https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=80","https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=800&q=80","https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=800&q=80"]},
+  {src:"https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=500&q=80",label:"Baby Wear Line",cat:"Baby",desc:"Soft, safe, and playful children's clothing crafted with hypoallergenic fabrics — from newborn gift sets to festive toddler party wear.",images:["https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800&q=80","https://images.unsplash.com/photo-1519689680058-324335c77eba?w=800&q=80","https://images.unsplash.com/photo-1522771930-78848d9293e8?w=800&q=80","https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=800&q=80"]},
+  {src:"https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=500&q=80",label:"Studio Session",cat:"Studio",desc:"Behind-the-scenes moments from the atelier — fittings, fabric selection, and production workflow inside the Mumbai fashion studio.",images:["https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&q=80","https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=800&q=80","https://images.unsplash.com/photo-1445205170230-053b83016050?w=800&q=80","https://images.unsplash.com/photo-1445205170230-053b83016050?w=800&q=80"]},
+  {src:"https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500&q=80",label:"Editorial Shoot",cat:"Ladies",desc:"Fashion editorial storytelling with dramatic lighting and refined styling — capturing the emotion and movement of each garment.",images:["https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&q=80","https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=800&q=80","https://images.unsplash.com/photo-1517841905240-472988babdf9?w=800&q=80","https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=80"]},
+  {src:"https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500&q=80",label:"Special Orders",cat:"Bespoke",desc:"One-of-a-kind custom commissions for private clients — wedding trousseaus, occasion wear, and heirloom-quality finishes.",images:["https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800&q=80","https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&q=80","https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&q=80","https://images.unsplash.com/photo-1607748862156-7c548e7e98f4?w=800&q=80"]},
+  {src:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80",label:"Brand Collab – Adidas",cat:"Brands",desc:"Seasonal sportswear and lifestyle collaboration work with Adidas — performance cuts, colourways, and market-ready capsules.",images:["https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&q=80","https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=800&q=80","https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=800&q=80","https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&q=80"]},
+  {src:"https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=500&q=80",label:"Celebrity Styling",cat:"Bespoke",desc:"Red-carpet and on-camera looks for film, TV, and influencer clients — tailored silhouettes designed for the spotlight.",images:["https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=800&q=80","https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&q=80","https://images.unsplash.com/photo-1517841905240-472988babdf9?w=800&q=80","https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800&q=80"]},
+  {src:"https://images.unsplash.com/photo-1509631179647-0177331693ae?w=500&q=80",label:"Ramp Walk Direction",cat:"Runway",desc:"Full runway show direction — model casting, walk choreography, staging cues, and backstage coordination for brand launches.",images:["https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800&q=80","https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80","https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800&q=80","https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&q=80"]}
 ];
 
 // BUILD SKILLS
 const sg = document.getElementById('skillsGrid');
 SKILLS.forEach((s,si)=>{
-  const card = document.createElement('div');
-  card.className='skill-card reveal';
+  const card = document.createElement('a');
+  card.className='skill-card skill-card-link reveal';
+  card.href=`skill-detail.html?id=${si}`;
   card.innerHTML=`
     <div class="skill-header">
       <img src="${s.img}" alt="${s.name}" loading="lazy">
@@ -621,21 +679,8 @@ SKILLS.forEach((s,si)=>{
     <div class="skill-body">
       <p class="skill-desc">${s.desc}</p>
       <div class="progress-bar"><div class="progress-fill" data-progress="${s.progress}"></div></div>
-      <div class="products-label">Productions & Products (${s.products.length})</div>
-      <div class="products-list">
-        ${s.products.map((p,pi)=>`
-          <div class="product-item" onclick="toggleProduct(this)">
-            <div class="product-item-header">
-              <span class="product-name">${p.name}</span>
-              <span class="product-toggle">▼</span>
-            </div>
-            <p class="product-desc" style="display:none;">${p.desc}</p>
-            <div class="product-images">
-              ${p.images.map(img=>`<img src="${img}" alt="${p.name}" loading="lazy">`).join('')}
-            </div>
-          </div>
-        `).join('')}
-      </div>
+      <div class="products-label">${s.products.length} Productions</div>
+      <span class="skill-card-cta">View details →</span>
     </div>
   `;
   sg.appendChild(card);
@@ -649,7 +694,6 @@ function toggleProduct(el){
   imgs.classList.toggle('open',!isOpen);
   desc.style.display = isOpen?'none':'block';
   tog.textContent = isOpen?'▼':'▲';
-  tog.style.transform = isOpen?'rotate(0)':'rotate(0)';
 }
 
 // BUILD TIMELINE
@@ -694,18 +738,39 @@ cats.forEach(c=>{
   gf.appendChild(btn);
 });
 const gg=document.getElementById('galleryGrid');
-GALLERY.forEach(g=>{
-  const item=document.createElement('div');
+GALLERY.forEach((g,i)=>{
+  const item=document.createElement('a');
   item.className='gallery-item';
+  item.href=`collection-detail.html?id=${i}`;
   item.dataset.cat=g.cat;
   item.innerHTML=`<img src="${g.src}" alt="${g.label}" loading="lazy"><div class="gallery-overlay"><span>${g.label}</span><small>${g.cat}</small></div>`;
   gg.appendChild(item);
 });
 
 // NAV SCROLL
+const navEl=document.getElementById('nav');
+const hamburger=document.querySelector('.hamburger');
+const navLinks=document.querySelector('.nav-links');
 window.addEventListener('scroll',()=>{
-  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60);
+  navEl.classList.toggle('scrolled',window.scrollY>60);
 });
+if(hamburger && navLinks){
+  const closeMenu=()=>{
+    navLinks.classList.remove('show');
+    hamburger.classList.remove('open');
+  };
+  hamburger.addEventListener('click',(e)=>{
+    e.stopPropagation();
+    navLinks.classList.toggle('show');
+    hamburger.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(link=>{
+    link.addEventListener('click',closeMenu);
+  });
+  document.addEventListener('click',(e)=>{
+    if(!navEl.contains(e.target)) closeMenu();
+  });
+}
 
 // PARTICLES
 (function(){
